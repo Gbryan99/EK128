@@ -1,0 +1,123 @@
+1084/18:
+with open('states_and_capitals.txt', 'rb') as afile:
+    lines = afile.readlines()
+1084/19: lines
+1084/20: answers = {}
+1084/21: line = lines[0]
+1084/22: clear
+1084/23: line
+1084/24: line.split()
+1084/25: line.split(',')
+1084/26: line.rstrip()
+1084/27: line = line.rstrip()
+1084/28: line
+1084/29: values = line.split(',')
+1084/30: values
+1084/31: state, capital = values[0], values[1]
+1084/32: state
+1084/33: capital
+1084/34:
+for line in lines:
+    sline = line.rstrip()
+    values = line.split(',')
+    answers[values[0]] = answers[values[1]]
+1084/35: answers
+1084/36:
+for line in lines:
+    sline = line.rstrip()
+    values = sline.split(',')
+    answers[values[0]] = answers[values[1]]
+1084/37:
+for line in lines:
+    sline = line.rstrip()
+    values = sline.split(',')
+    print(values)
+1084/38:
+for line in lines:
+    sline = line.rstrip()
+    values = sline.split(',')
+    print(values)
+    answers[values[0]] = value[1]
+1084/39:
+for line in lines:
+    sline = line.rstrip()
+    values = sline.split(',')
+    print(values)
+    answers[values[0]] = values[1]
+1084/40: answers
+1084/41: clear
+1084/42: answers['New York']
+1084/43: keys = answers.keys()
+1084/44: len(keys)
+1084/45: question = 'New York'
+1084/46: correct_answer = answers['New York']
+1084/47: wrong_answers = []
+1084/48: import random
+1084/49:
+for _ in range(3):
+    wrong_answers.append(answers[random.randint(51)])
+1084/50:
+for _ in range(3):
+    wrong_answers.append(answers[random.randint(0,50)])
+1084/51:
+for _ in range(3):
+    wrong_answers.append(answers[keys[random.randint(0,50)]])
+1084/52: wrong_answers
+1084/53: question
+1084/54: answer
+1084/55: correct_answer
+1084/56: clear
+1084/57: question
+1084/58: correct_answer
+1084/59: wrong_answers
+1084/60: asnwers = wrong_answers + correct_answer
+1084/61: answers = wrong_answers + [correct_answer]
+1084/62: clear
+1084/63: answers
+1084/64: question
+1084/65: import collections
+1084/66: random.shuffle(answers)
+1084/67: answers
+1084/68: random.shuffle(answers)
+1084/69: answers
+1084/70: random.shuffle(answers)
+1084/71: answers
+1084/72: given_answer = 2
+1084/73: dir()
+1084/74: answers
+1084/75: hist -n
+1085/1: hist -n
+1085/2: hist -ng
+1084/76: rerun 1084/18
+1084/77: user_answers = answers
+1084/78: rerun 1084/39
+1084/79: rerun 1084/39
+1084/80: recall 1084/39
+1084/81:
+for line in lines:
+    sline = line.rstrip()
+    values = sline.split(',')
+    answers[values[0]] = values[1]
+1084/82: answers = {}
+1084/83:
+for line in lines:
+    sline = line.rstrip()
+    values = sline.split(',')
+    answers[values[0]] = values[1]
+1084/84: answers
+1084/85: user_answers
+1084/86: question
+1084/87:
+if answers[question] == given_answer:
+    print 'Correc!'
+else:
+    print 'Incorrect'
+1084/88: given_answer
+1084/89: given_answer = user_answers[2]
+1084/90:
+if answers[question] == given_answer:
+    print 'Correc!'
+else:
+    print 'Incorrect'
+1084/91: given_answer
+1084/92: answers[question]
