@@ -37,6 +37,7 @@ mouse_clicked = False
 
 font = pygame.font.SysFont(None, 25)
 
+
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
@@ -147,15 +148,14 @@ def game_loop():
 
         count = 0
         score = 0
-        spa= open('sspanish.txt', 'r')
+        spa = open('sspanish.txt', 'r')
         eng = open('eenglish.txt', 'r')
         spanish = spa.readlines()
         english = eng.readlines()
 
-
         while count < 10:
             time.sleep(1)
-            gameDisplay.fill((255,255,255))
+            gameDisplay.fill((255, 255, 255))
             gameDisplay.fill((255, 255, 255))  # This sets the background of the display to plain white color
 
             gameDisplay.fill(yellow, rect=[30, 30, 150,
@@ -166,12 +166,12 @@ def game_loop():
             gameDisplay.fill(green, rect=[330, 330, 150, 150])  # This flashcard displays the term. Termcard
             button("Main Menu", 30, 530, 150, 50, red, bright_red, game_intro)  # Main Menu
 
-            wordnum = random.randint(0,len(spanish)-1)
+            wordnum = random.randint(0, len(spanish) - 1)
 
             options = [random.randint(0, len(english) - 1), random.randint(0, len(english) - 1),
-                           random.randint(0, len(english) - 1)]
+                       random.randint(0, len(english) - 1)]
 
-            options[random.randint(0,2)] = wordnum
+            options[random.randint(0, 2)] = wordnum
 
             question = font.render(spanish[wordnum].rstrip('\n'), True, black)
 
@@ -201,22 +201,19 @@ def game_loop():
                             answer = 3
                             done = True
 
-            if options[answer-1] == wordnum:
-                resulttext = font.render('Correct!', True, (50,255,50))
+            if options[answer - 1] == wordnum:
+                resulttext = font.render('Correct!', True, (50, 255, 50))
                 score = score + 1
             else:
-                resulttext = font.render('Wrong!', True, (255,50,50))
+                resulttext = font.render('Wrong!', True, (255, 50, 50))
 
             gameDisplay.blit(resulttext, (0, 0))
             pygame.display.update()
 
-
-            count = count+1
+            count = count + 1
 
             if count > 10:
                 gameExit = True
-
-
 
         pygame.display.update()
 
