@@ -147,10 +147,10 @@ def aboutpage():  # This will be the page that provides informationabout the gam
             if event.type == pygame.QUIT:
                 gameEx = True
 
-def score(score): #This will give the score
-    text = smallfont.render("Score:"+str(score), True, black)
-    gameDisplay.blit(text, [0,0])
 
+def score(score):  # This will give the score
+    text = smallfont.render("Score:" + str(score), True, black)
+    gameDisplay.blit(text, [0, 0])
 
 
 def game_loop():
@@ -167,31 +167,29 @@ def game_loop():
         eng = open('eenglish.txt', 'r')
         spanish = spa.readlines()
         english = eng.readlines()
-        
-        while count<10:
-            wordnum = random.randint(0, len(spanish)-1)
+
+        while count < 10:
+            wordnum = random.randint(0, len(spanish) - 1)
             print('Word:', spanish[wordnum], '')
-            options = [random.randint(0,len(english)-1), random.randint(0,len(english)-1), random.randint(0,len(english)-1)]
-            options[random.randint(0,2)]=wordnum
+            options = [random.randint(0, len(english) - 1), random.randint(0, len(english) - 1),
+                       random.randint(0, len(english) - 1)]
+            options[random.randint(0, 2)] = wordnum
             print('1 -', english[options[0]])
             print('2 -', english[options[1]])
             print('3 -', english[options[2]])
             answer = input('\nYour choice:')
-            if options[answer-1] == wordnum:
-                raw_input('\nCorrect! Hit enter...')
-                score = score+1
+            answered = int(answer)
+            if options[answer - 1] == wordnum:
+                input('\nCorrect! Hit enter...')
+                score = score + 1
             else:
-                raw_input('\nWrong! Hit enter...')
+                input('\nWrong! Hit enter...')
             count = count + 1
-            
-
-
-
 
         # pick question
-        #question = ''  # should be randomly selected from answers keys
+        # question = ''  # should be randomly selected from answers keys
         # pick answers
-        #user_answers = ['uno', 'dos', 'tres', 'cuatro']
+        # user_answers = ['uno', 'dos', 'tres', 'cuatro']
         # correct answer = answers[question]
 
         # pick 3 random incorrect answers
@@ -214,10 +212,10 @@ def game_loop():
         gameDisplay.fill(green, rect=[330, 330, 150, 150])  # This flashcard displays the term. Termcard
 
         # get value of answer from button click (0, 1, 2, 3)
-        #button_number = 0
+        # button_number = 0
 
         # select users's answer from answers list using input #
-        #given_answer = user_answers[button_number]
+        # given_answer = user_answers[button_number]
 
         # check if correct
         """if answers[question] == given_answer:
@@ -229,8 +227,8 @@ def game_loop():
 
         button("Main Menu", 30, 530, 150, 50, red, bright_red, game_intro)  # Main Menu
 
-        #score(0)
-        
+        # score(0)
+
         pygame.display.update()
 
 
