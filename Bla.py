@@ -181,11 +181,16 @@ def game_loop():
             text3 = font.render('3-' + english[options[2]].rstrip(''), True, black)
             text4 = font.render('4-' + english[options[3]].rstrip(''), True, black)
 
+            score_text = font.render('Score: %s' % int(score), True, black)
+
             gameDisplay.blit(text1, (30, 150))
             gameDisplay.blit(text2, (230, 150))
             gameDisplay.blit(text3, (430, 150))
             gameDisplay.blit(text4, (630, 150))
             gameDisplay.blit(question, (405, 405))
+
+            # show score
+            gameDisplay.blit(score_text, (30, 400))
 
             pygame.display.update()
 
@@ -205,8 +210,8 @@ def game_loop():
                             done = True
 
             if options[answer - 1] == wordnum:
-                resulttext = font.render('Correct!', True, (50, 255, 50))
                 score = score + 1
+                resulttext = font.render('Correct!', True, (50, 255, 50))
             else:
                 resulttext = font.render('Wrong!', True, (255, 50, 50))
 
@@ -216,6 +221,7 @@ def game_loop():
             count = count + 1
 
         if count >= maxcount:
+            time.sleep(2)
             gameExit = True
 
         pygame.display.update()
