@@ -35,21 +35,11 @@ mouse_x = None
 mouse_y = None
 mouse_clicked = False
 
+font = pygame.font.SysFont(None, 25)
 
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
-
-
-def message_display(text):
-    largeText = pygame.font.Font('freesansbold.ttf', 50)
-    TextSurf, TextRect = text_objects(text, largeText)
-    TextRect.center = ((display_width * 0.5), (display_height * 0.5))
-    gameDisplay.blit(TextSurf, TextRect)
-
-    time.sleep(2)
-
-    game_loop()
 
 
 # This button function will allow the buttons on the screen to be interactive
@@ -72,7 +62,6 @@ def button(msg, x, y, w, h, inactColor, actColor, action=None):
         pygame.draw.rect(gameDisplay, actColor, (x, y, w, h))  # button lights up
         if click[0] == 1 and action != None:  # click[0] is the left mouse click
             action()
-
 
     else:
         pygame.draw.rect(gameDisplay, inactColor, (x, y, w, h))  # button (normal: does not light up)
@@ -148,86 +137,85 @@ def aboutpage():  # This will be the page that provides informationabout the gam
                 gameEx = True
 
 
-def score(score):  # This will give the score
-    text = smallfont.render("Score:" + str(score), True, black)
-    gameDisplay.blit(text, [0, 0])
-
-
 def game_loop():
     gameExit = False
-    while not gameExit:
 
+    while not gameExit:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gameExit = True
 
         count = 0
         score = 0
-        spa = open('sspanish.txt', 'r')
+        spa= open('sspanish.txt', 'r')
         eng = open('eenglish.txt', 'r')
         spanish = spa.readlines()
         english = eng.readlines()
 
+
         while count < 10:
-            wordnum = random.randint(0, len(spanish) - 1)
-            print('Word:', spanish[wordnum], '')
+            gameDisplay.fill((255,255,255))
+            gameDisplay.fill((255, 255, 255))  # This sets the background of the display to plain white color
+
+            gameDisplay.fill(yellow, rect=[30, 30, 150,
+                                           150])  # This draws a yellow box (which will act as a flashcard) AnsOption1
+            gameDisplay.fill(yellow, rect=[230, 30, 150, 150])  # This flashcard is an answer option. AnsOption2
+            gameDisplay.fill(yellow, rect=[430, 30, 150, 150])  # AnsOption 3
+            gameDisplay.fill(yellow, rect=[630, 30, 150, 150])  # AnsOption 4
+            gameDisplay.fill(green, rect=[330, 330, 150, 150])  # This flashcard displays the term. Termcard
+            button("Main Menu", 30, 530, 150, 50, red, bright_red, game_intro)  # Main Menu
+
+            wordnum = random.randint(0,len(spanish)-1)
+
             options = [random.randint(0, len(english) - 1), random.randint(0, len(english) - 1),
-                       random.randint(0, len(english) - 1)]
-            options[random.randint(0, 2)] = wordnum
-            print('1 -', english[options[0]])
-            print('2 -', english[options[1]])
-            print('3 -', english[options[2]])
-            answer = input('\nYour choice:')
-            answered = int(answer)
-            if options[answer - 1] == wordnum:
-                input('\nCorrect! Hit enter...')
+                           random.randint(0, len(english) - 1)]
+
+            options[random.randint(0,2)] = wordnum
+
+            question = font.render(spanish[wordnum].rstrip('\n'), True, black)
+
+            text1 = font.render('1-' + english[options[0]].rstrip('\n'), True, black)
+            text2 = font.render('2-' + english[options[1]].rstrip('\n'), True, black)
+            text3 = font.render('3-' + english[options[2]].rstrip('\n'), True, black)
+
+            gameDisplay.blit(text1, (30, 150))
+            gameDisplay.blit(text2, (230, 150))
+            gameDisplay.blit(text3, (430, 150))
+            gameDisplay.blit(question, (500, 150))
+
+            pygame.display.update()
+
+            done = False
+
+            while not done:
+                for a in pygame.event.get():
+                    if a.type == KEYUP:
+                        if a.key == K_1:
+                            answer = 1
+                            done = True
+                        if a.key == K_2:
+                            answer = 2
+                            done = True
+                        if a.key == K_3:
+                            answer = 3
+                            done = True
+
+            if options[answer-1] == wordnum:
+                resulttext = font.render('Correct!', True, (50,255,50))
                 score = score + 1
             else:
-                input('\nWrong! Hit enter...')
-            count = count + 1
+                resulttext = font.render('Wrong!', True, (255,50,50))
 
-        # pick question
-        # question = ''  # should be randomly selected from answers keys
-        # pick answers
-        # user_answers = ['uno', 'dos', 'tres', 'cuatro']
-        # correct answer = answers[question]
-
-        # pick 3 random incorrect answers
+            gameDisplay.blit(resulttext, (0, 0))
+            pygame.display.update()
 
 
-        # shuffle answers
-        # random.shuffle(answers)
+            count = count+1
+
+            if count > 10:
+                gameExit = True
 
 
-
-
-        gameDisplay.fill((255, 255, 255))  # This sets the background of the display to plain white color
-
-        # assign an answer to each button
-        gameDisplay.fill(yellow,
-                         rect=[30, 30, 150, 150])  # This draws a yellow box (which will act as a flashcard) AnsOption1
-        gameDisplay.fill(yellow, rect=[230, 30, 150, 150])  # This flashcard is an answer option. AnsOption2
-        gameDisplay.fill(yellow, rect=[430, 30, 150, 150])  # AnsOption 3
-        gameDisplay.fill(yellow, rect=[630, 30, 150, 150])  # AnsOption 4
-        gameDisplay.fill(green, rect=[330, 330, 150, 150])  # This flashcard displays the term. Termcard
-
-        # get value of answer from button click (0, 1, 2, 3)
-        # button_number = 0
-
-        # select users's answer from answers list using input #
-        # given_answer = user_answers[button_number]
-
-        # check if correct
-        """if answers[question] == given_answer:
-            # congratulate the user
-            pass
-        else:
-            # dispense punishment
-            pass"""
-
-        button("Main Menu", 30, 530, 150, 50, red, bright_red, game_intro)  # Main Menu
-
-        # score(0)
 
         pygame.display.update()
 
