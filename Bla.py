@@ -147,13 +147,14 @@ def game_loop():
                 gameExit = True
 
         count = 0
+        maxcount = 3
         score = 0
         spa = open('sspanish.txt', 'r')
         eng = open('eenglish.txt', 'r')
         spanish = spa.readlines()
         english = eng.readlines()
 
-        while count < 10:
+        while count < maxcount:
             time.sleep(1)
             gameDisplay.fill((255, 255, 255))
             gameDisplay.fill((255, 255, 255))  # This sets the background of the display to plain white color
@@ -168,21 +169,23 @@ def game_loop():
 
             wordnum = random.randint(0, len(spanish) - 1)
 
-            options = [random.randint(0, len(english) - 1), random.randint(0, len(english) - 1),
-                       random.randint(0, len(english) - 1)]
+            options = [random.randint(0, len(english) - 2), random.randint(0, len(english) - 2),
+                       random.randint(0, len(english) - 2), random.randint(0, len(english) - 2)]
 
             options[random.randint(0, 2)] = wordnum
 
-            question = font.render(spanish[wordnum].rstrip('\n'), True, black)
+            question = font.render(spanish[wordnum].rstrip(''), True, black)
 
-            text1 = font.render('1-' + english[options[0]].rstrip('\n'), True, black)
-            text2 = font.render('2-' + english[options[1]].rstrip('\n'), True, black)
-            text3 = font.render('3-' + english[options[2]].rstrip('\n'), True, black)
+            text1 = font.render('1-' + english[options[0]].rstrip(''), True, black)
+            text2 = font.render('2-' + english[options[1]].rstrip(''), True, black)
+            text3 = font.render('3-' + english[options[2]].rstrip(''), True, black)
+            text4 = font.render('4-' + english[options[3]].rstrip(''), True, black)
 
             gameDisplay.blit(text1, (30, 150))
             gameDisplay.blit(text2, (230, 150))
             gameDisplay.blit(text3, (430, 150))
-            gameDisplay.blit(question, (500, 150))
+            gameDisplay.blit(text4, (630, 150))
+            gameDisplay.blit(question, (405, 405))
 
             pygame.display.update()
 
@@ -212,8 +215,8 @@ def game_loop():
 
             count = count + 1
 
-            if count > 10:
-                gameExit = True
+        if count >= maxcount:
+            gameExit = True
 
         pygame.display.update()
 
