@@ -154,6 +154,7 @@ def game_loop():
 
 
         while count < 10:
+            time.sleep(1)
             gameDisplay.fill((255,255,255))
             gameDisplay.fill((255, 255, 255))  # This sets the background of the display to plain white color
 
