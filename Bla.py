@@ -197,6 +197,7 @@ def game_loop():
             done = False
 
             while not done:
+                button("Main Menu", 30, 530, 150, 50, red, bright_red, game_intro)  # Main Menu
                 for a in pygame.event.get():
                     if a.type == KEYUP:
                         if a.key == K_1:
@@ -225,6 +226,7 @@ def game_loop():
             gameExit = True
 
         pygame.display.update()
+
 
 
 game_intro()
